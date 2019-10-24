@@ -45,23 +45,26 @@ while bet <= bank:
         if roll == point:
             bank = bank + bet
             print("You win! You rolled point!")
+            print(f"You now have {bank} in your bank!")
         else:
             bank = bank - bet
             print("You rolled a 7, You Lose!")
+    print("If you would like to play again? yes or no")
+    choice = input()
+    if choice == "yes":
+        print(f"You have {bank} in your bank. How much would you like to bet?")
+        bet = int(input("> "))
+        if bet > bank:
+            print(f"You can't bet more than what you have in your bank. The game will now end.")
+            bank = 0
+    else:
+        bank = 0
+
 while bet <= 0:
     print("Invalid input, try again")
     bet = int(input("> "))
 
-print("If you would like to play again? yes or no")
-choice = input()
-if choice == "yes":
-    print(f"You have {bank} in your bank. How much would you like to bet?")
-    bet = int(input("> "))
-    if bet > bank:
-        print(f"You can't bet more than what you have in your bank. The game will now end.")
-        bet = 0
-    else:
-        bet = 0
+
 
 
 
