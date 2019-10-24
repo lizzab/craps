@@ -6,42 +6,67 @@ import random
 
 
 def balance():
-    print("""
-    Welcome to Craps!
-    You will be asked to enter your bankroll
-    This is the amount of money you will be playing with""")
     print("ENTER bankroll:")
-    bal = int(input("> "))
+    return int(input("> "))
 
 
-balance()
+bank = balance()
 
 
-def bet():
-    print("Enter the amount you want to bet")
-    betting = int(input("> "))
+print(f"Enter the amount you want to bet from your bank {bank}")
+bet = int(input("> "))
 
 
-while bet() <= balance():
-    def dice_roll():
-        total_amount = balance() - bet()
-        roll = random.randint(2,12)
-        print(f"You rolled a {roll}")
-        if roll == 2 or roll == 3 or roll == 12:
-            lose_bet = total_amount - bet()
-            print(f"You rolled a {roll}: You Lose!")
-        elif roll == 7 or roll == 11:
-            win_bet = total_amount + bet()
-            print(f"You rolled a {roll}: You Win!")
-        else:
-            print(f"You rolled a {roll}: This is point")
-            print("If you roll your point than you win! If you roll a 7 you lose")
-    decision = input("Would you like to play again? \n1: Yes \n2: No")
-    if decision == 1:
-        dice_roll()
+# Betting
+while bet <= bank:
+    roll = random.randint(2,12)
+
+    print(f"You rolled a {roll}")
+
+    if roll == 7 or roll == 11:
+        print("You win!")
+        bank = bank + bet
+        print(f"You now have {bank} in your bank.")
+
+    elif roll == 2 or roll == 3 or roll == 12:
+        print("You lose!")
+        bank = bank - bet
+        print(f"Now you have {bank} in your bank.")
     else:
-        print("Good luck with the rest of your day!")
-    break
+        print("This value becomes your point, you must roll this value again to win, or roll a 7 and lose!")
+        point = roll
+
+        roll = random.randint(2,12)
+
+        while roll != point and roll != 7:
+            print(f"You have rolled a {roll}, roll again.")
+            roll = random.randint(2,12)
+
+        if roll == point:
+            bank = bank + bet
+            print("You win! You rolled point!")
+        else:
+            bank = bank - bet
+            print("You rolled a 7, You Lose!")
+while bet <= 0:
+    print("Invalid input, try again")
+    bet = int(input("> "))
+
+print("If you would like to play again? yes or no")
+choice = input()
+if choice == "yes":
+    print(f"You have {bank} in your bank. How much would you like to bet?")
+    bet = int(input("> "))
+    if bet > bank:
+        print(f"You can't bet more than what you have in your bank. The game will now end.")
+        bet = 0
+    else:
+        bet = 0
+
+
+
+
+
 
 
 
