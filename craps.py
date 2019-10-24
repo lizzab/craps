@@ -63,13 +63,3 @@ while bet <= bank:
 while bet <= 0:
     print("Invalid input, try again")
     bet = int(input("> "))
-
-
-
-
-
-
-
-
-
-
